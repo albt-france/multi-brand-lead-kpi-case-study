@@ -1,0 +1,30 @@
+# Rebuilds everything from public sources and runs every test: Python, SQL (PGlite) and TypeScript.
+name: Verify pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: pip install -r requirements.txt
+      - run: python pipeline/fetch_public.py
+      - run: python pipeline/simulate.py
+      - run: python pipeline/spam_classifier.py
+      - run: npm ci
+      - run: npm run db:build
+      - run: npm run audit
+      - run: npm test
+      - run: pytest -q tests

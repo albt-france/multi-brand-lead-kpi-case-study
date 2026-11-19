@@ -1,0 +1,41 @@
+{
+  "name": "multi-brand-lead-kpi-case-study",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Auditing, attributing and reconciling lead data across five fictional local-service brands.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "db:build": "tsx scripts/db_build.ts",
+    "audit": "tsx scripts/run_audit.ts && tsx scripts/evaluate.ts",
+    "test": "vitest run",
+    "export": "tsx scripts/export_marts.ts",
+    "dev": "next dev web",
+    "build": "next build web",
+    "screens": "tsx scripts/screenshots.ts",
+    "pdf": "tsx scripts/build_pdf.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.16",
+    "@fontsource/fraunces": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "echarts": "6.1.0",
+    "libphonenumber-js": "1.13.16",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "jsdom": "29.1.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  },
+  "engines": {
+    "node": ">=20.11"
+  }
+}

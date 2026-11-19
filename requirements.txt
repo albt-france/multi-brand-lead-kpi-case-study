@@ -1,0 +1,8 @@
+# Python part of the pipeline (public data, simulation, spam classifier, GA4 panel)
+duckdb==1.5.6
+numpy==2.2.6
+pandas==2.3.3
+pyarrow==25.0.1
+pytest==9.2.0
+requests==2.34.2
+scikit-learn==1.7.2

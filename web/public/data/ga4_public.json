@@ -1,0 +1,141 @@
+{
+ "label": "PUBLIC DATA - Google GA4 obfuscated sample (Google Merchandise Store), e-commerce, not lead-gen",
+ "period": [
+  "20201101",
+  "20210131"
+ ],
+ "sessions": 359815,
+ "session_source_buckets": {
+  "No source on any page_view": 0.3678,
+  "Self-referral (own domain)": 0.0953,
+  "(direct)": 0.0981,
+  "<Other> (obfuscated)": 0.1344,
+  "(data deleted)": 0.0109,
+  "Attributed source": 0.2935
+ },
+ "first_touch_vs_session_source_mismatch": 0.3127,
+ "first_touch_sources": [
+  [
+   "google",
+   128221
+  ],
+  [
+   "<Other>",
+   97239
+  ],
+  [
+   "(direct)",
+   83394
+  ],
+  [
+   "shop.googlemerchandisestore.com",
+   28803
+  ],
+  [
+   "(data deleted)",
+   22158
+  ]
+ ],
+ "weekly": [
+  {
+   "week": "2020-10-26",
+   "sessions": 2620,
+   "no_source": 0.3771,
+   "self_referral": 0.1771,
+   "direct": 0.204
+  },
+  {
+   "week": "2020-11-02",
+   "sessions": 24955,
+   "no_source": 0.3388,
+   "self_referral": 0.2115,
+   "direct": 0.1692
+  },
+  {
+   "week": "2020-11-09",
+   "sessions": 22488,
+   "no_source": 0.2838,
+   "self_referral": 0.2007,
+   "direct": 0.1612
+  },
+  {
+   "week": "2020-11-16",
+   "sessions": 25891,
+   "no_source": 0.2918,
+   "self_referral": 0.1976,
+   "direct": 0.1649
+  },
+  {
+   "week": "2020-11-23",
+   "sessions": 27744,
+   "no_source": 0.3065,
+   "self_referral": 0.1961,
+   "direct": 0.1676
+  },
+  {
+   "week": "2020-11-30",
+   "sessions": 31054,
+   "no_source": 0.3022,
+   "self_referral": 0.2,
+   "direct": 0.1658
+  },
+  {
+   "week": "2020-12-07",
+   "sessions": 38694,
+   "no_source": 0.3362,
+   "self_referral": 0.2001,
+   "direct": 0.1587
+  },
+  {
+   "week": "2020-12-14",
+   "sessions": 33382,
+   "no_source": 0.321,
+   "self_referral": 0.165,
+   "direct": 0.1665
+  },
+  {
+   "week": "2020-12-21",
+   "sessions": 22063,
+   "no_source": 0.3587,
+   "self_referral": 0.1452,
+   "direct": 0.1631
+  },
+  {
+   "week": "2020-12-28",
+   "sessions": 20439,
+   "no_source": 0.4444,
+   "self_referral": 0.0755,
+   "direct": 0.1853
+  },
+  {
+   "week": "2021-01-04",
+   "sessions": 29015,
+   "no_source": 0.4869,
+   "self_referral": 0.0661,
+   "direct": 0.1909
+  },
+  {
+   "week": "2021-01-11",
+   "sessions": 27693,
+   "no_source": 0.4366,
+   "self_referral": 0.0697,
+   "direct": 0.1895
+  },
+  {
+   "week": "2021-01-18",
+   "sessions": 27466,
+   "no_source": 0.4576,
+   "self_referral": 0.0611,
+   "direct": 0.1038
+  },
+  {
+   "week": "2021-01-25",
+   "sessions": 26311,
+   "no_source": 0.4389,
+   "self_referral": 0.0538,
+   "direct": 0.0086
+  }
+ ],
+ "utm_in_page_location": 0,
+ "note": "page_location in the obfuscated sample carries no UTM / gclid parameters, so URL-level checks are shown on simulated data only."
+}
