@@ -66,7 +66,7 @@ export default function Attribution() {
                 series: [
                   { name: "GCLID coverage", type: "line", data: months.map((m) => m.paid_search_with_gclid / m.paid_search_with_utm), symbolSize: 6, lineStyle: { width: 2, color: tk["ch-google_ads"] }, itemStyle: { color: tk["ch-google_ads"] },
                     endLabel: { show: true, formatter: "GCLID coverage", color: tk.ink2, fontSize: 11 },
-                    markArea: { silent: true, itemStyle: { color: tk["signal-wash"] }, label: { color: tk["signal-ink"], fontFamily: "JetBrains Mono", fontSize: 10 },
+                    markArea: { silent: true, itemStyle: { color: tk["signal-wash"] }, label: { color: tk["signal-ink"], fontFamily: "Consolas, ui-monospace, monospace", fontSize: 10 },
                       data: x.includes(monthLabel("2026-06")) ? [[{ xAxis: monthLabel("2026-06"), name: "#04" }, { xAxis: monthLabel("2026-07") }]] : [] } },
                   { name: "Re-attributed", type: "line", data: months.map((m) => m.reattributed / m.leads), symbolSize: 6, lineStyle: { width: 2, color: tk.ink3, type: [5, 3] }, itemStyle: { color: tk.ink3 },
                     endLabel: { show: true, formatter: "Re-attributed", color: tk.ink2, fontSize: 11 } },
@@ -107,7 +107,7 @@ export default function Attribution() {
                     ...cors.map((c) => ({ name: `${chLabel(c)} `, itemStyle: { color: color(c), borderWidth: 0 }, label: { position: "right", color: tk.ink } }))],
                   links: [...links.entries()].map(([k, v]) => ({ source: `CRM: ${chLabel(k.split("|")[0])}`, target: `${chLabel(k.split("|")[1])} `, value: v,
                     lineStyle: { color: k.split("|")[0] === k.split("|")[1] ? tk.rule : color(k.split("|")[1]), opacity: k.split("|")[0] === k.split("|")[1] ? 0.55 : 0.5, curveness: 0.5 } })),
-                  label: { fontSize: 12, fontFamily: "Inter, sans-serif" }, emphasis: { focus: "adjacency" },
+                  label: { fontSize: 12, fontFamily: "Segoe UI, Inter, sans-serif" }, emphasis: { focus: "adjacency" },
                 }],
               };
             }} />
@@ -131,7 +131,7 @@ export default function Attribution() {
                 yAxis: bs.yAxis({ type: "value" }),
                 series: [
                   { ...ln("Direct, CRM label", "raw_direct", tk["ch-direct"], true),
-                    markArea: { silent: true, itemStyle: { color: tk["signal-wash"] }, label: { color: tk["signal-ink"], fontFamily: "JetBrains Mono", fontSize: 10 }, data: [[{ xAxis: weekOf("2026-02-09"), name: "#03 redirect" }, { xAxis: weekOf("2026-03-22") }]] } },
+                    markArea: { silent: true, itemStyle: { color: tk["signal-wash"] }, label: { color: tk["signal-ink"], fontFamily: "Consolas, ui-monospace, monospace", fontSize: 10 }, data: [[{ xAxis: weekOf("2026-02-09"), name: "#03 redirect" }, { xAxis: weekOf("2026-03-22") }]] } },
                   ln("Direct, corrected", "cor_direct", tk["ch-direct"], false),
                   ln("Google Ads, CRM label", "raw_gads", tk["ch-google_ads"], true),
                   ln("Google Ads, corrected", "cor_gads", tk["ch-google_ads"], false),

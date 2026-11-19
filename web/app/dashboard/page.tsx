@@ -162,7 +162,7 @@ function Multiple({ brand }: { brand: string }) {
             yAxis: bs.yAxis({ type: "value", show: false, max: qmax * 1.15 }),
             series: [
               { type: "line", data: q.map((x) => x[1]), showSymbol: false, lineStyle: { width: 2, color: tk.ink }, areaStyle: { color: tk.surface2, opacity: 1 },
-                markArea: { silent: true, itemStyle: { color: tk["signal-wash"], opacity: .8 }, label: { color: tk["signal-ink"], fontSize: 10, fontFamily: "JetBrains Mono" }, data: areas } },
+                markArea: { silent: true, itemStyle: { color: tk["signal-wash"], opacity: .8 }, label: { color: tk["signal-ink"], fontSize: 10, fontFamily: "Consolas, ui-monospace, monospace" }, data: areas } },
             ],
           };
         }} />

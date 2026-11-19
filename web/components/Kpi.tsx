@@ -19,7 +19,7 @@ export function KpiTile({ id, value, sub, trust, trustNote, delay = 0 }: { id: s
       <div className="sub">{sub}</div>
       <div className="row">
         <TrustBadge trust={trust} title={trustNote} />
-        <button className="trace-btn" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label={`Trace ${def.title}`}>TRACE →</button>
+        <button className="trace-btn" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label={`Trace ${def.title}`}>Trace</button>
       </div>
       {open && <TraceDrawer id={id} value={value} trust={trust} trustNote={trustNote} onClose={() => setOpen(false)} />}
     </div>

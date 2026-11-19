@@ -10,4 +10,6 @@ export default {
   images: { unoptimized: true },
   reactStrictMode: true,
   poweredByHeader: false,
+  // Always defined (empty by default) so the PDF-only methods note is absent from the normal build.
+  env: { NEXT_PUBLIC_METHODS_NOTE: process.env.NEXT_PUBLIC_METHODS_NOTE || "" },
 };

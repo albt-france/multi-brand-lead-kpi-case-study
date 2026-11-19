@@ -9,15 +9,15 @@ import { brandLabel } from "@/lib/format";
 import { Loading } from "./ui";
 import { Logo, FOOTER } from "./brand";
 
-// v1 publishes the four core pages; the others are added in v2 (ready: false hides them).
+// Pages of the report (ready: false would hide one from the navigation).
 export const PAGES = [
   { href: "/dashboard/", label: "Overview", n: "01", ready: true },
-  { href: "/dashboard/channels/", label: "Channels & spend", n: "02", ready: false },
+  { href: "/dashboard/channels/", label: "Channels & spend", n: "02", ready: true },
   { href: "/dashboard/attribution/", label: "Attribution health", n: "03", ready: true },
   { href: "/dashboard/audit/", label: "Lead audit", n: "04", ready: true },
   { href: "/dashboard/reconciliation/", label: "Reconciliation", n: "05", ready: true },
-  { href: "/dashboard/quality/", label: "Data quality monitor", n: "06", ready: false },
-  { href: "/dashboard/lineage/", label: "Lineage & methods", n: "07", ready: false },
+  { href: "/dashboard/quality/", label: "Data quality monitor", n: "06", ready: true },
+  { href: "/dashboard/lineage/", label: "Lineage & methods", n: "07", ready: true },
 ].filter((p) => p.ready);
 
 export function ThemeToggle() {
@@ -54,6 +54,7 @@ export default function Shell({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <div className="rail-foot">
+          <a className="navlink" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/lab/`}><span className="num">↗</span><span>Tracking lab</span></a>
           <ThemeToggle />
           <button className="iconbtn" onClick={() => setCollapsed((c) => !c)} aria-expanded={!collapsed} aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}>{collapsed ? "»" : "«"}<span>Collapse</span></button>
         </div>
@@ -92,7 +93,7 @@ export default function Shell({ children }: { children: ReactNode }) {
         <main id="main" tabIndex={-1}>
           {error ? <div className="content"><div className="empty">Could not load the data files ({error}). Run <code className="mono">npm run export</code> and reload.</div></div> : data ? children : <Loading />}
         </main>
-        <footer className="sitefoot"><span>{FOOTER}</span><span className="mono">Signal Ledger · v1</span></footer>
+        <footer className="sitefoot"><span>{FOOTER}</span><span>Signal Ledger · v2</span></footer>
       </div>
     </div>
   );

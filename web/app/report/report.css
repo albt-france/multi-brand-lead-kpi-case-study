@@ -1,0 +1,29 @@
+/* Print layout for the 8-page PDF: A4 landscape, one .rpage per sheet. */
+@page { size: 297mm 210mm; margin: 0; }
+.report { background: var(--bg); }
+.rpage {
+  width: 297mm; height: 210mm; padding: 10mm 13mm 8mm; display: flex; flex-direction: column; gap: 4mm;
+  background: var(--bg); break-after: page; page-break-after: always; overflow: hidden; position: relative;
+}
+.rpage:last-child { break-after: auto; page-break-after: auto; }
+.rhead { display: flex; justify-content: space-between; align-items: center; }
+.rpage h1 { font-size: 21px; line-height: 1.25; max-width: 250mm; }
+.rpage h2 { font-size: 13.5px; display: flex; gap: 8px; align-items: center; margin-bottom: 2mm; }
+.rpage p, .rpage li { font-size: 12px; line-height: 1.45; color: var(--ink-2); }
+.rpage ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 3px; }
+.rpage .lede { font-size: 13px; max-width: 260mm; }
+.rbody { flex: 1; display: flex; flex-direction: column; gap: 4mm; min-height: 0; }
+.rfoot { display: flex; justify-content: space-between; font-size: 9px; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 2mm; }
+.rcard { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 4mm 5mm; min-width: 0; display: flex; flex-direction: column; gap: 2mm; }
+.rgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.rgrid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+.rgrid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+.rkpi { background: var(--surface); border: 1px solid var(--rule); border-top: 3px solid var(--ink); border-radius: 6px; padding: 4mm 5mm; }
+.rkpi .bigkpi { font-size: 26px; margin: 2mm 0; }
+.rtable { width: 100%; border-collapse: collapse; font-size: 11.5px; background: var(--surface); }
+.rtable th { position: static; font-size: 9.5px; }
+.rtable td { padding: 5px 8px; vertical-align: top; }
+.rtable.small td { font-size: 10.5px; padding: 4px 7px; }
+.rtable tr.hl td { background: var(--info-wash); }
+@media screen { .report { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px 0; } .rpage { box-shadow: 0 2px 12px rgba(0,0,0,.15); } }
+@media print { .chart-tools { display: none !important; } }

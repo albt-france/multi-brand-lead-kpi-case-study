@@ -1,14 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-// Self-hosted fonts (OFL), bundled at build time: no font CDN at runtime.
-import "@fontsource/fraunces/400.css";
-import "@fontsource/fraunces/400-italic.css";
-import "@fontsource/fraunces/600.css";
+// Inter (OFL) is self-hosted as the fallback for Segoe UI: no font CDN at runtime.
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
-import "@fontsource/jetbrains-mono/400.css";
-import "@fontsource/jetbrains-mono/600.css";
+import "@fontsource/inter/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

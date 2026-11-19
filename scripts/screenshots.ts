@@ -34,7 +34,7 @@ for (const p of pages) {
   const [name, path] = p.split(":");
   for (const m of modes) {
     const [theme, dev] = m.split("-");
-    const size = dev === "mobile" ? "390,2600" : name === "home" ? "1440,900" : "1440,2400";
+    const size = dev === "mobile" ? "390,2600" : name === "home" ? "1440,900" : name === "report" ? "1123,6400" : "1440,2400";
     const file = resolve(SHOTS, `${name}-${theme}-${dev}.png`);
     await run(EDGE!, ["--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run", `--user-data-dir=${join(tmpdir(), "lk-edge")}`,
       `--window-size=${size}`, "--virtual-time-budget=9000", `--screenshot=${file}`, `http://localhost:${PORT}${path}?theme=${theme}`], { timeout: 90_000 });

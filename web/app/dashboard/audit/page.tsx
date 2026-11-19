@@ -140,7 +140,7 @@ function RuleBars() {
           ...bs, grid: { left: 128, right: 44, top: 4, bottom: 4 },
           tooltip: { ...bs.tooltip, trigger: "item" },
           xAxis: bs.xAxis({ type: "value", show: false }),
-          yAxis: bs.yAxis({ type: "category", data: rows.map((r) => r.rule_id), axisLabel: { ...bs.font, fontFamily: "JetBrains Mono" }, splitLine: { show: false } }),
+          yAxis: bs.yAxis({ type: "category", data: rows.map((r) => r.rule_id), axisLabel: { ...bs.font, fontFamily: "Consolas, ui-monospace, monospace" }, splitLine: { show: false } }),
           series: [{ type: "bar", data: rows.map((r) => ({ value: r.n, itemStyle: { color: tk[color[r.flag_type]], borderRadius: [0, 4, 4, 0] } })), barWidth: 10,
             label: { show: true, position: "right", color: tk.ink2, fontSize: 11, formatter: (p: any) => n0(p.value) } }],
         };

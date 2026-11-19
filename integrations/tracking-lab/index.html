@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracking lab · Signal Ledger</title>
+<meta name="description" content="Demo of first-party UTM / GCLID / fbclid capture, hidden fields, a shared event_id for Pixel + Conversions API, and a conversion counted once. Fictional data; no tag is sent.">
+<link rel="icon" href="../icon.svg">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("lk-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+:root{color-scheme:light;--bg:#F3EFE6;--surface:#FFFDF8;--surface-2:#F8F4EC;--ink:#15171B;--ink-2:#4A4D55;--ink-3:#6B6E76;--rule:#D8D1C2;--rule-soft:#E8E2D5;
+--signal-ink:#B83A0B;--signal-wash:#FFE7DC;--verified-ink:#0A6E57;--verified-wash:#DDF3EC;--info-ink:#3446D4;--info-wash:#E3E6FB;--font:"Segoe UI",Inter,system-ui,-apple-system,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0D0F12;--surface:#16191E;--surface-2:#1B1F25;--ink:#ECE7DC;--ink-2:#B9B4AA;--ink-3:#8E8A82;--rule:#2A2F37;--rule-soft:#22262D;--signal-ink:#FF8A5C;--signal-wash:#3A1E14;--verified-ink:#3FD0AB;--verified-wash:#10302A;--info-ink:#93A0F5;--info-wash:#1C2142}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0D0F12;--surface:#16191E;--surface-2:#1B1F25;--ink:#ECE7DC;--ink-2:#B9B4AA;--ink-3:#8E8A82;--rule:#2A2F37;--rule-soft:#22262D;--signal-ink:#FF8A5C;--signal-wash:#3A1E14;--verified-ink:#3FD0AB;--verified-wash:#10302A;--info-ink:#93A0F5;--info-wash:#1C2142}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.5 var(--font)}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 28px;background:var(--surface);border-bottom:1px solid var(--rule)}
+header b{font-size:15px}header a{color:var(--ink-2);font-size:13px}
+main{max-width:1400px;margin:0 auto;padding:22px 28px 40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.eyebrow{font:600 11px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+h1{grid-column:span 12;margin:0;font-size:24px;font-weight:700}h2{margin:0 0 4px;font-size:15.5px;font-weight:600}
+.lede{grid-column:span 12;color:var(--ink-2);max-width:960px;margin:0}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.s4{grid-column:span 4}.s8{grid-column:span 8}.s6{grid-column:span 6}.s12{grid-column:span 12}
+.sub{color:var(--ink-3);font-size:12.5px;margin:0}
+button,.btn{height:32px;padding:0 12px;border-radius:4px;border:1px solid var(--rule);background:var(--surface-2);color:var(--ink);font:600 13px var(--font);cursor:pointer;text-align:left}
+button.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+label{display:flex;flex-direction:column;gap:3px;font:600 10.5px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+input{height:32px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink);padding:0 10px;font:400 14px var(--font);text-transform:none;letter-spacing:0}
+pre{margin:0;background:var(--surface-2);border:1px solid var(--rule-soft);border-radius:4px;padding:10px;font:12px/1.45 var(--mono);white-space:pre-wrap;word-break:break-all;max-height:300px;overflow:auto}
+.tag{display:inline-flex;height:18px;align-items:center;padding:0 6px;border-radius:3px;font:700 10px var(--font);letter-spacing:.06em;text-transform:uppercase}
+.ok{background:var(--verified-wash);color:var(--verified-ink)}.bad{background:var(--signal-wash);color:var(--signal-ink)}.info{background:var(--info-wash);color:var(--info-ink)}
+.step{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}.step b{font-size:12px;color:var(--ink-3)}
+footer{padding:16px 28px;border-top:1px solid var(--rule);font-size:12px;color:var(--ink-3)}
+@media (max-width:860px){main{padding:16px}.s4,.s8,.s6{grid-column:span 12}header{padding:12px 16px}}
+</style>
+</head>
+<body>
+<header><span><b>Signal Ledger</b> · Tracking lab <span class="tag info">Demo · simulated</span></span><a href="../dashboard/">← Back to the dashboard</a></header>
+<main id="main">
+  <div class="eyebrow" style="grid-column:span 12">Tracking lab · incidents #03, #04, #05, #10</div>
+  <h1>Capture the click once, keep it 90 days, and count the lead once</h1>
+  <p class="lede">A working demo of the snippet the brands' sites would run. It fixes four incidents of the audit: UTMs lost after a redirect (#03), a GCLID missing from the form (#04), Pixel and CAPI not deduplicated (#05) and a conversion counted twice on reload (#10). Fictional data: nothing is sent to Google or Meta.</p>
+
+  <section class="card s4">
+    <h2>1 · Arrive from an ad</h2>
+    <p class="sub">Simulates the landing URL. Parameters are read and stored in first-party storage for 90 days.</p>
+    <div class="row" style="flex-direction:column;align-items:stretch">
+      <button data-url="/lp/ac-repair?utm_source=google&utm_medium=cpc&utm_campaign=search-ac-repair&gclid=Cj0KCQjwLAB0001">Google Ads click (UTM + gclid)</button>
+      <button data-url="/offer/ac-tune-up?utm_source=facebook&utm_medium=paid_social&utm_campaign=social-ac&fbclid=IwARlab0001">Meta ad click (UTM + fbclid)</button>
+      <button data-url="/contact">Later visit, no parameters (after a redirect)</button>
+      <button id="clear">Clear stored attribution</button>
+    </div>
+    <pre id="stored" aria-live="polite">No attribution stored yet.</pre>
+  </section>
+
+  <section class="card s4">
+    <h2>2 · Fill the form</h2>
+    <p class="sub">Hidden fields are filled from storage, so the CRM receives the click even if the URL lost it.</p>
+    <form id="form" autocomplete="off">
+      <div class="row" style="flex-direction:column;align-items:stretch">
+        <label>Phone<input name="phone" value="(602) 555-0142"></label>
+        <label>E-mail<input name="email" value="lab.visitor@example.com"></label>
+        <input type="hidden" name="gclid"><input type="hidden" name="utm_source">
+        <button class="primary" type="submit">Send request</button>
+      </div>
+    </form>
+    <pre id="hidden">Hidden fields: (empty)</pre>
+  </section>
+
+  <section class="card s4">
+    <h2>3 · Thank-you page</h2>
+    <p class="sub">The dataLayer receives <code>generate_lead</code> with an <code>event_id</code>. Reloading the page must not count it again.</p>
+    <div class="row"><button id="reload">Reload thank-you page</button></div>
+    <div id="count" aria-live="polite"><span class="tag info">No submission yet</span></div>
+    <pre id="dl">dataLayer: []</pre>
+  </section>
+
+  <section class="card s12">
+    <h2>4 · Same lead, server side</h2>
+    <p class="sub">The server sends the lead to the Meta Conversions API with the <b>same event_id</b> (and event name). Meta deduplicates a browser and a server event when both match, within 48 hours (official documentation, read 2026-11-18). Without it, HVAC·PHX counted leads ~1.7× (#05).</p>
+    <pre id="capi">Submit the form to see the payload.</pre>
+  </section>
+</main>
+<footer>Independent case study built from a public job description · fictional companies and simulated data, except where marked PUBLIC DATA · not affiliated with any client or platform</footer>
+<script type="module">
+import { readAttribution, saveAttribution, loadAttribution, fillHiddenFields, newEventId, trackLeadOnce, capiPayload } from "./capture.js";
+const ORIGIN = "https://www.hvac-phx.example";
+const $ = (id) => document.getElementById(id);
+window.dataLayer = window.dataLayer || [];
+let last = { sid: null, eid: null };
+const show = () => {
+  const rec = loadAttribution(localStorage);
+  $("stored").textContent = rec ? JSON.stringify({ first: rec.first, last: rec.last, expires: new Date(rec.expires).toISOString().slice(0, 10) }, null, 2) : "No attribution stored.";
+  fillHiddenFields($("form"), rec);
+  const h = [...$("form").querySelectorAll('input[type="hidden"]')].filter((i) => i.value).map((i) => `${i.name} = ${i.value}`);
+  $("hidden").textContent = h.length ? "Hidden fields:\n" + h.join("\n") : "Hidden fields: (empty)";
+  $("dl").textContent = "dataLayer: " + JSON.stringify(window.dataLayer, null, 2);
+};
+document.querySelectorAll("button[data-url]").forEach((b) => b.addEventListener("click", () => { saveAttribution(localStorage, readAttribution(ORIGIN + b.dataset.url)); show(); }));
+$("clear").addEventListener("click", () => { localStorage.removeItem("lk_attribution"); $("form").querySelectorAll('input[type="hidden"]').forEach((i) => (i.value = "")); show(); });
+$("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  last = { sid: "sub_" + Date.now().toString(36), eid: newEventId() };
+  const counted = trackLeadOnce(window.dataLayer, sessionStorage, last.sid, last.eid, { form_id: "quote_form" });
+  $("count").innerHTML = counted ? '<span class="tag ok">Counted once</span>' : '<span class="tag bad">Already counted</span>';
+  $("capi").textContent = JSON.stringify(capiPayload(last.eid, ORIGIN + "/thank-you"), null, 2);
+  show();
+});
+$("reload").addEventListener("click", () => {
+  if (!last.sid) { $("count").innerHTML = '<span class="tag info">Submit the form first</span>'; return; }
+  const counted = trackLeadOnce(window.dataLayer, sessionStorage, last.sid, last.eid);
+  $("count").innerHTML = counted ? '<span class="tag bad">Counted again</span>' : '<span class="tag ok">Reload ignored: still counted once</span>';
+  show();
+});
+show();
+</script>
+</body>
+</html>

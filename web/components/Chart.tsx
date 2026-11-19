@@ -40,13 +40,13 @@ export function useThemeVersion() {
 
 /** Base pieces shared by every chart: quiet axes, horizontal grid only, sober tooltip. */
 export function base(t: Tokens) {
-  const font = { fontFamily: "Inter, system-ui, sans-serif", color: t.ink3, fontSize: 11 };
+  const font = { fontFamily: "Segoe UI, Inter, system-ui, sans-serif", color: t.ink3, fontSize: 11 };
   return {
-    textStyle: { fontFamily: "Inter, system-ui, sans-serif", color: t.ink2 },
+    textStyle: { fontFamily: "Segoe UI, Inter, system-ui, sans-serif", color: t.ink2 },
     animationDuration: 220, animationDurationUpdate: 180, animationEasing: "cubicOut",
     tooltip: {
       backgroundColor: t.surface, borderColor: t.rule, borderWidth: 1, padding: [8, 10],
-      textStyle: { color: t.ink, fontSize: 12, fontFamily: "Inter, system-ui, sans-serif" },
+      textStyle: { color: t.ink, fontSize: 12, fontFamily: "Segoe UI, Inter, system-ui, sans-serif" },
       extraCssText: "box-shadow: 0 8px 24px -12px rgba(0,0,0,.35); border-radius: 8px;",
     },
     xAxis: (o: object = {}) => ({ axisLine: { lineStyle: { color: t.rule } }, axisTick: { show: false }, axisLabel: { ...font, hideOverlap: true }, splitLine: { show: false }, ...o }),

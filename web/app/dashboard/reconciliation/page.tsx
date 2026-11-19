@@ -104,7 +104,7 @@ export default function Reconciliation() {
                 if (s.v >= 0) { baseVals.push(run); up.push(s.v); down.push("-"); run += s.v; } else { run += s.v; baseVals.push(run); down.push(-s.v); up.push("-"); }
               }
               const totalsBars = tot.map((v) => (v === "-" ? "-" : (v as number) - axisMin));
-              const lab = (sign: string) => ({ show: true, position: "top", color: tk.ink, fontSize: 12, fontFamily: "JetBrains Mono", formatter: (p: any) => (p.value === "-" || p.value === 0 ? "" : `${sign}${n0(p.value)}`) });
+              const lab = (sign: string) => ({ show: true, position: "top", color: tk.ink, fontSize: 12, fontFamily: "Consolas, ui-monospace, monospace", formatter: (p: any) => (p.value === "-" || p.value === 0 ? "" : `${sign}${n0(p.value)}`) });
               return {
                 ...bs, grid: { left: 44, right: 12, top: 24, bottom: 44 },
                 tooltip: { ...bs.tooltip, trigger: "axis", axisPointer: { type: "shadow" }, formatter: (p: any[]) => { const s = steps[p[0].dataIndex]; return `${s.name.replace("\n", " ")}<br/><b>${s.v > 0 && !s.total ? "+" : ""}${n0(s.v)}</b>`; } },

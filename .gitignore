@@ -17,3 +17,5 @@ backups/
 .env
 _*.ts
 data/derived/message_scores.csv
+web/public/lab/
+web/public/icon.svg
